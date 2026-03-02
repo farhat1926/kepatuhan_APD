@@ -1,0 +1,235 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Form Kepatuhan penggunaan APD</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <style>
+      body {
+        margin: 0;
+        font-family: "Segoe UI", sans-serif;
+        background: linear-gradient(135deg, #1e3c72, #2a5298);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+      }
+
+      .container {
+        background: #ffffff;
+        width: 95%;
+        max-width: 750px;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      }
+
+      h2 {
+        text-align: center;
+        margin-bottom: 25px;
+        color: #1e3c72;
+      }
+
+      label {
+        font-weight: 600;
+        font-size: 14px;
+        display: block;
+        margin-top: 15px;
+        margin-bottom: 5px;
+        color: #333;
+      }
+
+      input,
+      select {
+        width: 100%;
+        padding: 10px;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        font-size: 14px;
+        transition: 0.3s;
+      }
+
+      input:focus,
+      select:focus {
+        border-color: #2a5298;
+        outline: none;
+        box-shadow: 0 0 5px rgba(42, 82, 152, 0.4);
+      }
+
+      .section-title {
+        margin-top: 25px;
+        font-weight: bold;
+        color: #2a5298;
+        border-bottom: 2px solid #2a5298;
+        padding-bottom: 5px;
+      }
+
+      button {
+        margin-top: 25px;
+        width: 100%;
+        padding: 12px;
+        border: none;
+        border-radius: 8px;
+        background: #2a5298;
+        color: white;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+
+      button:hover {
+        background: #1e3c72;
+      }
+
+      button:disabled {
+        background: gray;
+        cursor: not-allowed;
+      }
+
+      /* NOTIFICATION */
+      .toast {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: #28a745;
+        color: white;
+        padding: 15px 20px;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        opacity: 0;
+        transform: translateY(-20px);
+        transition: 0.4s ease;
+        z-index: 999;
+      }
+
+      .toast.show {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .toast span {
+        font-size: 20px;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <h2>Form Pelaporan Kepatuhan Cuci Tangan</h2>
+
+      <form id="myForm">
+        <label>Tanggal</label>
+        <input type="date" name="tanggal_input" required />
+
+        <label>Asal Unit</label>
+        <input type="text" name="asal_unit" required />
+
+        <label>nama_petugas</label>
+        <input type="text" name="nama_petugas" required />
+
+        <label>Bulan</label>
+        <input type="text" name="bulan" required />
+
+        <div class="section-title">Kepatuhan APD</div>
+
+        <label>Masker</label>
+        <select name="masker" required>
+          <option value="">-- Pilih --</option>
+          <option value="Memakai dengan tepat">Memakai dengan tepat</option>
+          <option value="Memakai tidak tepat">Memakai tidak tepat</option>
+          <option value="Tidak memakai">Tidak memakai</option>
+        </select>
+
+        <label>Handscoon </label>
+        <select name="handscoon" required>
+          <option value="">-- Pilih --</option>
+          <option value="Memakai dengan tepat ">Memakai dengan tepat</option>
+          <option value="Memakai tidak tepat">Memakai tidak tepat</option>
+          <option value="Tidak memakai">Tidak memakai</option>
+        </select>
+
+        <label>Celemek / apron</label>
+        <select name="celemek_apron" required>
+          <option value="">-- Pilih --</option>
+          <option value="Memakai dengan tepat">Memakai dengan tepat</option>
+          <option value="Memakai tidak tepat">Memakai tidak tepat</option>
+          <option value="Tidak memakai">Tidak memakai</option>
+        </select>
+
+        <label>Alas kaki khusus</label>
+        <select name="alas_kaki_khusus" required>
+          <option value="">-- Pilih --</option>
+          <option value="Memakai dengan tepat">Memakai dengan tepat</option>
+          <option value="Memakai tidak tepat">Memakai tidak tepat</option>
+          <option value="Tidak memakai">Tidak memakai</option>
+        </select>
+
+        <label>Google</label>
+        <select name="google" required>
+          <option value="">-- Pilih --</option>
+          <option value="Memakai dengan tepat">Memakai dengan tepat</option>
+          <option value="Memakai tidak tepat">Memakai tidak tepat</option>
+          <option value="Tidak memakai">Tidak memakai</option>
+        </select>
+
+        <label>Topi</label>
+        <select name="topi" required>
+          <option value="">-- Pilih --</option>
+          <option value="Memakai dengan tepat">Memakai dengan tepat</option>
+          <option value="Memakai tidak tepat">Memakai tidak tepat</option>
+          <option value="Tidak memakai">Tidak memakai</option>
+        </select>
+
+        <button type="submit" id="submitBtn">Simpan Data</button>
+      </form>
+    </div>
+
+    <div class="toast" id="toast">
+      <span>✔</span>
+      <div>Data berhasil disimpan!</div>
+    </div>
+
+    <script>
+      const scriptURL =
+        "https://script.google.com/macros/s/AKfycbwFiVR3JHaJaEJXJSr9BYQmd40WQBiwjcRWhRbCEgoaGLC41C_ZBtmSFn7C9EODRMsm/exec";
+      const form = document.getElementById("myForm");
+      const toast = document.getElementById("toast");
+      const button = document.getElementById("submitBtn");
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        button.disabled = true;
+        button.innerText = "Menyimpan...";
+
+        fetch(scriptURL, {
+          method: "POST",
+          body: new FormData(form),
+        })
+          .then((response) => {
+            form.reset();
+            showToast();
+          })
+          .catch((error) => {
+            alert("Terjadi kesalahan saat menyimpan data!");
+          })
+          .finally(() => {
+            button.disabled = false;
+            button.innerText = "Simpan Data";
+          });
+      });
+
+      function showToast() {
+        toast.classList.add("show");
+        setTimeout(() => {
+          toast.classList.remove("show");
+        }, 3000);
+      }
+    </script>
+  </body>
+</html>
